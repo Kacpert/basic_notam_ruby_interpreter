@@ -1,0 +1,9 @@
+%h1 FilteringNotams#new
+%p Find me in app/views/filtering_notams/new.html.haml
+%br
+%br
+%br
+= form_for :filtering, url: filtering_notams_path do |f|
+  = f.file_field :notams, accept: 'text/*'
+  %br
+  = f.submit
