@@ -1,9 +1,11 @@
-%h1 FilteringNotams#new
-%p Find me in app/views/filtering_notams/new.html.haml
+%h1 NOTAMs parsing
+%h3 Place file OR paste text :)
 %br
 %br
 %br
 = form_for :filtering, url: filtering_notams_path do |f|
   = f.file_field :notams, accept: 'text/*'
+  %br
+  = f.text_area(:text, cols: 80, rows: 30)
   %br
   = f.submit

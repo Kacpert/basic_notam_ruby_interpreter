@@ -1,4 +1,8 @@
-%h1 FilteringNotams#create
-%p Find me in app/views/filtering_notams/create.html.haml
-=@array.size
-=@array
+%h1 
+  =link_to 'Add new NOTAMs', root_path
+%table
+  - @formated_data.each do |notam_inf|
+    %tr
+      -notam_inf.each do |inf|
+        %td
+          %p= raw inf
