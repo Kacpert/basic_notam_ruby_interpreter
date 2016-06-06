@@ -36,4 +36,3 @@ RSpec.describe NotamDateToArrayParserAndInterpreter, type: :parser do
     end
   end
 end
-      # allow(user = create(:user)).to receive(:courses) { create_list(:course, 4) }
