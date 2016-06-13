@@ -14,6 +14,10 @@ RSpec.describe NotamDateToArrayParserAndInterpreter, type: :parser do
   end  
 
   describe '#result' do
+    it 'should ignore invalid data' do
+      parser = NotamDateToArrayParserAndInterpreter.new("MON-WOW 0230-0500")
+      expect(parser.result).to eq(["system found", "syntax error", "in that NOTAM", "'WOW'", "is not" , "represents","a day"])
+    end
     it 'Should work with extreme cases' do 
       parser = NotamDateToArrayParserAndInterpreter.new("MON-SUN 0230-0500, 0530-1200, 1230-2400")
       expect(parser.result).to eq(["0230-0500</br>0530-1200</br>1230-2400",

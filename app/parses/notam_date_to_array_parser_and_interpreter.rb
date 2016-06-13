@@ -1,12 +1,13 @@
 class NotamDateToArrayParserAndInterpreter
   def initialize text
+    @errors = nil
     # @tokens = ["MON", "0500", "-", "2000", "TUE", "-", "THU", "0500", "-", "2100", "FRI", "0545", "-", "2100", "SAT0630", "-", "0730", "1900", "-", "2100", "SUN", "1215", "-", "2000"]
     @tokens = text.gsub(/[\\n,:\.]/, " ").gsub("-", " - ").split(" ")
     @parser_result = []
   end
 
   def result(token = next_token)
-    return @parser_result unless token
+    return @errors || @parser_result unless token
     first_day = days token
     second_token = next_token
     if second_token == "-"
@@ -52,7 +53,8 @@ class NotamDateToArrayParserAndInterpreter
       when "SAT" then 6
       when "SUN" then 7
       else
-        raise "Syntax error in notams: unexpected: #{token}"
+        @errors = ["system found", "syntax error", "in that NOTAM", "'#{token}'", "is not" , "represents","a day"]
+        0
     end
   end
 
