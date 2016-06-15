@@ -1,5 +1,7 @@
 == Stratajet Recruitment Programming Exercise - Kacper Tarchała
 
++ Basic error handling
+
 {Live Demo}[http://basic-notam-ruby-interpreter.herokuapp.com/]
 
 After 'bundle' you can use rails s :)
