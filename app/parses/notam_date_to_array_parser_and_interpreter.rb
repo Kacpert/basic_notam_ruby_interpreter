@@ -8,7 +8,7 @@ class NotamDateToArrayParserAndInterpreter
 
   def interprate_and_return_result(token = next_token)
     return @errors || @parser_result unless token
-    first_day = days token
+    first_day = parse_day_to_integer token
     second_token = next_token
     if second_token == "-"
       find_the_amount_and_fill_parser_result_from(first_day)
@@ -19,7 +19,7 @@ class NotamDateToArrayParserAndInterpreter
   end
 
   def find_the_amount_and_fill_parser_result_from(first_day)
-    second_day = days(next_token)
+    second_day = parse_day_to_integer(next_token)
     ammount = second_day - first_day + 1
     fill_parser_result_by(next_token, ammount: ammount)
   end
@@ -43,7 +43,7 @@ class NotamDateToArrayParserAndInterpreter
     @tokens.shift
   end
 
-  def days token
+  def parse_day_to_integer token
     token = fix_whitespace_in token
     case token.upcase
       when "MON" then 1
