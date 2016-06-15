@@ -6,7 +6,7 @@ class NotamDateToArrayParserAndInterpreter
     @parser_result = []
   end
 
-  def result(token = next_token)
+  def interprate_and_return_result(token = next_token)
     return @errors || @parser_result unless token
     first_day = days token
     second_token = next_token
@@ -15,6 +15,7 @@ class NotamDateToArrayParserAndInterpreter
     else
       fill_parser_result_by(second_token)
     end
+    
   end
 
   def find_the_amount_and_fill_parser_result_from(first_day)
@@ -26,7 +27,7 @@ class NotamDateToArrayParserAndInterpreter
   def fill_parser_result_by(token, ammount: 1)
     if token == "CLOSED" || token == "CLSD"
       @parser_result += [token] * ammount 
-      result
+      interprate_and_return_result
     else
       value = ""
       while (token =~ /^\d\d\d\d$/)
@@ -34,7 +35,7 @@ class NotamDateToArrayParserAndInterpreter
         token = next_token
       end
       ammount.times{@parser_result.push(value.chomp("</br>"))}
-      result(token)
+      interprate_and_return_result(token)
     end
   end
 

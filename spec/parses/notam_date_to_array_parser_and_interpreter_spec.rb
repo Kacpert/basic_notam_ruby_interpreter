@@ -13,14 +13,16 @@ RSpec.describe NotamDateToArrayParserAndInterpreter, type: :parser do
     end
   end  
 
-  describe '#result' do
-    it 'should ignore invalid data' do
+  describe 'catching errors' do
+    it 'when day name is wrong should ignore that record and return error' do
       parser = NotamDateToArrayParserAndInterpreter.new("MON-WOW 0230-0500")
-      expect(parser.result).to eq(["system found", "syntax error", "in that NOTAM", "'WOW'", "is not" , "represents","a day"])
+      expect(parser.interprate_and_return_result).to eq(["system found", "syntax error", "in that NOTAM", "'WOW'", "is not" , "represents","a day"])
     end
+  end
+  describe '#interprate_and_return_result' do
     it 'Should work with extreme cases' do 
       parser = NotamDateToArrayParserAndInterpreter.new("MON-SUN 0230-0500, 0530-1200, 1230-2400")
-      expect(parser.result).to eq(["0230-0500</br>0530-1200</br>1230-2400",
+      expect(parser.interprate_and_return_result).to eq(["0230-0500</br>0530-1200</br>1230-2400",
                                    "0230-0500</br>0530-1200</br>1230-2400",
                                    "0230-0500</br>0530-1200</br>1230-2400",
                                    "0230-0500</br>0530-1200</br>1230-2400",
@@ -30,7 +32,7 @@ RSpec.describe NotamDateToArrayParserAndInterpreter, type: :parser do
     end
     it 'Should work with standard cases' do 
       parser = NotamDateToArrayParserAndInterpreter.new(string_to_test)
-      expect(parser.result).to eq(["0500-1830",
+      expect(parser.interprate_and_return_result).to eq(["0500-1830",
                                    "0500-1830",
                                    "0500-1830",
                                    "0500-1830",
